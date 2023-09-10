@@ -7,7 +7,7 @@ import Fab from "@mui/material/Fab";
 import NavigationIcon from "@mui/icons-material/Navigation";
 
 function App() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const [Name, setName] = useState("");
   const [CityFrom, setCityFrom] = useState("");
