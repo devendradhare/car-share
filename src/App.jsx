@@ -1,10 +1,24 @@
 import { useState, useCallback } from "react";
 import "./css/App.css";
+
+// components
 import JourneyCard from "./components/JourneyCard.jsx";
 import SuccessAlert from "./components/SuccessAlert";
+import Navbar from "./components/Navbar";
 
+// mui components
 import Fab from "@mui/material/Fab";
 import NavigationIcon from "@mui/icons-material/Navigation";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+// mui functions
+  const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+
+    
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -46,7 +60,14 @@ function App() {
     return <JourneyCard key={journeyInfo.sn} journeyInfo={journeyInfo} />;
   }, []);
   return (
+    <>
+    <ThemeProvider theme={darkTheme}>
+      <Navbar />
+    </ThemeProvider>
     <div className="App">
+
+
+
       <SuccessAlert open={open} setOpen={setOpen} />
       <h2>Car-share</h2>
       <form onSubmit={e => addJourney(e)}>
@@ -90,6 +111,7 @@ function App() {
         {JourneyList.map(addCar)}
       </div>
     </div>
+    </>
   );
 }
 
