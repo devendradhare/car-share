@@ -1,0 +1,8 @@
+.journeyCard{
+    background: #28282cb8;
+    margin: 10px 0;
+    padding: 5px;
+    border: 2px solid gray;
+    display: flex;
+    flex-direction: column;
+}
