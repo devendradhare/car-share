@@ -14,22 +14,18 @@ import EditIcon from "@mui/icons-material/Edit";
 import UpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { green } from "@mui/material/colors";
 import Box from "@mui/material/Box";
-
-// my imports
+////////////// my imports
 import JourneyItem from "../journeyItem/JourneyItem";
 import AddJourney from "./AddJourney";
-
-// redux
+////////////// redux
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
-import {
-  openAddJourneydialog,
-  closeAddJourneydialog
-} from "../../redux/slices/addJourneydialog";
+import { toggleAddJourneydialog } from "../../redux/slices/addJourneydialog";
+import { notificationMarkAsRead } from "../../redux/slices/notifications/notification";
+import { mailMarkAsRead } from "../../redux/slices/mails/mail";
+import { increment, decrement } from "../../redux/slices/counter"; ////////////// will be removed
+import Button from "@mui/material/Button";
 
-import { increment, decrement } from "../../redux/slices/counter";
-
-// my functions
-
+////////////// MUI functions components
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -86,8 +82,11 @@ export default function FloatingActionButtonZoom() {
   // {   sn: 1,   name: "devendra",   cityFrom: "chhindwara",   cityTo: "bhopal" }
 
   // redux
-  const count = useAppSelector(s => s.counter);
   const dispatch = useAppDispatch();
+  const count = useAppSelector(s => s.counter);
+  const notification = useAppSelector(state => state.notifications);
+  const mail = useAppSelector(state => state.mail);
+  const search = useAppSelector(state => state.search);
 
   // my functions
   const addCar = React.useCallback(journeyInfo => {
@@ -103,6 +102,14 @@ export default function FloatingActionButtonZoom() {
     setValue(index);
   };
 
+  const handleNotificationMarkAsRead = () => {
+    dispatch(notificationMarkAsRead())
+  }
+
+  const handleMailMarkAsRead = () => {
+    dispatch(mailMarkAsRead())
+  }
+
   const transitionDuration = {
     enter: theme.transitions.duration.enteringScreen,
     exit: theme.transitions.duration.leavingScreen
@@ -116,8 +123,7 @@ export default function FloatingActionButtonZoom() {
       label: "Add",
       onClick: () => {
         console.log("button clicked");
-        dispatch(increment());
-        dispatch(openAddJourneydialog());
+        dispatch(toggleAddJourneydialog());
       }
     },
     {
@@ -169,7 +175,10 @@ export default function FloatingActionButtonZoom() {
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
           {JourneyList.map(addCar)}
-          <AddJourney JourneyList={JourneyList} setJourneyList={setJourneyList} />
+          <AddJourney
+            JourneyList={JourneyList}
+            setJourneyList={setJourneyList}
+          />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           <h1>
@@ -177,7 +186,30 @@ export default function FloatingActionButtonZoom() {
           </h1>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
+          <h3>
+            notification : {notification}{" "}
+            <Button
+              onClick={() => handleNotificationMarkAsRead()}
+              variant="outlined"
+              size="small"
+              color="primary"
+            >
+              mark as raed
+            </Button>
+          </h3>
+          <h3>
+            mail: {mail}{" "}
+            <Button
+              onClick={() => handleMailMarkAsRead()}
+              variant="outlined"
+              size="small"
+              color="primary"
+            >
+              mark as raed
+            </Button>
+          </h3>
+          <h3>search: {search}</h3>
+          <h3>menu click: in production</h3>
         </TabPanel>
       </SwipeableViews>
       {fabs.map((fab, index) =>
@@ -190,9 +222,9 @@ export default function FloatingActionButtonZoom() {
             transitionDelay: `${value === index
               ? transitionDuration.exit
               : 0}ms`,
-            position: 'fixed',
-            right: "20px",
-          }}  
+            position: "fixed",
+            right: "20px"
+          }}
           unmountOnExit
         >
           <Fab sx={fab.sx} aria-label={fab.label} color={fab.color}>

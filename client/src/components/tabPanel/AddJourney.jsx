@@ -11,17 +11,12 @@ import Typography from "@mui/material/Typography";
 import Fab from "@mui/material/Fab";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import Input from "@mui/material/Input";
-
-// css
+////////////// css
 import "./addjourney.css";
-
-// redux
+////////////// redux
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { increment, decrement } from "../../redux/slices/counter";
-import {
-  openAddJourneydialog,
-  closeAddJourneydialog
-} from "../../redux/slices/addJourneydialog";
+import { toggleAddJourneydialog } from "../../redux/slices/addJourneydialog";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -38,7 +33,7 @@ export default function CustomizedDialogs({ JourneyList, setJourneyList }) {
 
   const handleClickOpen = () => {};
   const handleClose = () => {
-    dispatch(closeAddJourneydialog());
+    dispatch(toggleAddJourneydialog());
   };
 
   const [Name, setName] = React.useState("");

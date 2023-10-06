@@ -4,12 +4,11 @@ export const addJourneyDialogSlice = createSlice({
   name: "addJourneydialog",
   initialState: false,
   reducers: {
-        openAddJourneydialog: (state) => true,
-        closeAddJourneydialog: (state) => false,
+        toggleAddJourneydialog: (state) => !state,
     }
   }
 );
 
-export const { openAddJourneydialog, closeAddJourneydialog } = addJourneyDialogSlice.actions;
+export const { toggleAddJourneydialog } = addJourneyDialogSlice.actions;
 
 export default addJourneyDialogSlice.reducer;

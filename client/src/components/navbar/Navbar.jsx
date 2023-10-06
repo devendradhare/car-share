@@ -15,6 +15,11 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
+/////////// redux
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
+import { notificationClick } from "../../redux/slices/notifications/notification";
+import { mailClick } from "../../redux/slices/mails/mail";
+import { setSearch } from "../../redux/slices/search/search";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -57,6 +62,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
+  const dispatch = useAppDispatch();
+  const notification = useAppSelector(state => state.notifications);
+  const mail = useAppSelector(state => state.mail);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -154,8 +163,21 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
+  const handleNotificationClick = () => {
+    dispatch(notificationClick());
+  };
+
+  const handleMailClick = () => {
+    dispatch(mailClick());
+  };
+
+  const handleSearchInputChange = (event) => {
+    // console.log(event.target.value);
+    dispatch(setSearch(event.target.value));
+  }
+
   return (
-    <Box /*sx={{ flexGrow: 0 }}*/ >
+    <Box /*sx={{ flexGrow: 0 }}*/>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -182,16 +204,18 @@ export default function PrimarySearchAppBar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              onChange={(e) => handleSearchInputChange(e)}
             />
           </Search>
-          <Box  sx={{ flexGrow: 1 }} />
+          <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
-              size="large"  
+              size="large"
               aria-label="show 4 new mails"
               color="inherit"
+              onClick={() => handleMailClick()}
             >
-              <Badge badgeContent={4} color="error">
+              <Badge badgeContent={mail} color="error">
                 <MailIcon />
               </Badge>
             </IconButton>
@@ -199,8 +223,9 @@ export default function PrimarySearchAppBar() {
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
+              onClick={() => handleNotificationClick()}
             >
-              <Badge badgeContent={1} color="error">
+              <Badge badgeContent={notification} color="error">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
