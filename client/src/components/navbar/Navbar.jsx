@@ -129,8 +129,8 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
+        <IconButton onClick={()=>{}} size="large" aria-label="show new mails" color="inherit">
+          <Badge badgeContent={mail} color="error">
             <MailIcon />
           </Badge>
         </IconButton>
@@ -139,10 +139,10 @@ export default function PrimarySearchAppBar() {
       <MenuItem>
         <IconButton
           size="large"
-          aria-label="show 17 new notifications"
+          aria-label="show new notifications"
           color="inherit"
         >
-          <Badge badgeContent={17} color="error">
+          <Badge badgeContent={notification} color="error">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -171,10 +171,10 @@ export default function PrimarySearchAppBar() {
     dispatch(mailClick());
   };
 
-  const handleSearchInputChange = (event) => {
+  const handleSearchInputChange = event => {
     // console.log(event.target.value);
     dispatch(setSearch(event.target.value));
-  }
+  };
 
   return (
     <Box /*sx={{ flexGrow: 0 }}*/>
@@ -204,7 +204,7 @@ export default function PrimarySearchAppBar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
-              onChange={(e) => handleSearchInputChange(e)}
+              onChange={e => handleSearchInputChange(e)}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
