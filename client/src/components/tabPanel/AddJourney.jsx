@@ -12,7 +12,7 @@ import Fab from "@mui/material/Fab";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import Input from "@mui/material/Input";
 ////////////// css
-import "./addjourney.css";
+import styles from "./addjourney.module.css";
 ////////////// redux
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { increment, decrement } from "../../redux/slices/counter";
@@ -61,12 +61,12 @@ export default function CustomizedDialogs({ JourneyList, setJourneyList }) {
   // console.log(JourneyList);
 
   return (
-    <div className="add-journey">
+    <div className={styles.add_journey}>
       <div
         onClose={handleClose}
         // aria-labelledby="customized-dialog-title"
         open={journeyDialog}
-        className={"the-dialog" + (!journeyDialog ? " hide-the-dialog" : " ")}
+        className={styles.the_dialog+ " " + (!journeyDialog ? " hide-the-dialog" : " ")}
       >
         <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
           Modal title
@@ -83,8 +83,8 @@ export default function CustomizedDialogs({ JourneyList, setJourneyList }) {
         >
           <CloseIcon />
         </IconButton>
-        <form onSubmit={e => addJourney(e)} className="journey-form">
-          <DialogContent dividers className="user-inputs">
+        <form onSubmit={e => addJourney(e)} className={styles.journey_form}>
+          <DialogContent dividers className={styles.user_inputs}>
             <Input
               required
               value={Name}
@@ -122,5 +122,8 @@ export default function CustomizedDialogs({ JourneyList, setJourneyList }) {
         </form>
       </div>
     </div>
+    // <div>
+    //   add asdfa
+    // </div>
   );
 }

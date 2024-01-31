@@ -1,5 +1,3 @@
-import "./css/App.css";
-
 // components
 import AppStructure from "./components/AppStructure";
 
@@ -9,9 +7,9 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 // mui functions
 const darkTheme = createTheme({
   palette: {
-    mode: "dark"
+    mode: "dark",
     // mode: "light"
-  }
+  },
 });
 
 function App() {

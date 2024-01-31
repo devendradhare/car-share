@@ -62,6 +62,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
+  // redux
   const dispatch = useAppDispatch();
   const notification = useAppSelector(state => state.notifications);
   const mail = useAppSelector(state => state.mail);
@@ -197,7 +198,7 @@ export default function PrimarySearchAppBar() {
           >
             Car-Share
           </Typography>
-          <Search>
+          {/* <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -206,7 +207,7 @@ export default function PrimarySearchAppBar() {
               inputProps={{ "aria-label": "search" }}
               onChange={e => handleSearchInputChange(e)}
             />
-          </Search>
+          </Search> */}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton

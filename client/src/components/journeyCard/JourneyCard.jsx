@@ -1,5 +1,5 @@
 import React from 'react'
-import "../css/JourneyCard.css";
+import "./JourneyCard.css";
 
 export default function JourneyCard({journeyInfo}) {
   return (

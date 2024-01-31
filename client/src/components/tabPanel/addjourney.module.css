@@ -1,4 +1,4 @@
-.add-journey {
+.add_journey {
     height: 100vh;
 }
 
@@ -8,13 +8,13 @@
     height: 200px;
 }     */
 
-.user-inputs {
+.user_inputs {
     display: flex;
     flex-direction: column;
     height: 45vh;
 }
 
-.the-dialog {
+.the_dialog {
     background: rgb(18, 18, 18);
     width: 100%;
     margin: 0;
@@ -24,6 +24,6 @@
     right: 5px;
 }
 
-.hide-the-dialog {
+.hide_the_dialog {
     display: none;
 }
